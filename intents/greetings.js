@@ -11,6 +11,6 @@ const getGreetings = () => {
         'Hi, how can I help you?',
         'Hey, what do you need?',
     ]
-    return random(answers)
+    return Promise.resolve(random(answers));
 }
 module.exports = getGreetings;

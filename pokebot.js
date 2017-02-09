@@ -20,9 +20,12 @@ const INTENTS = {
 bot.dialog('/', (session) => {
     recastClient.textRequest(session.message.text)
     .then(res => {
-    const intent = res.intent()
-    const entity = res.get('pokemon')
+    const intent = res.intent();
+    const entity = res.get('pokemon');
     if (intent) {
+        INTENTS[intent.slug](entity)
+            .then(res => session.send(res))
+            .catch(err => session.send(err))
         session.send(INTENTS[intent.slug](entity))
     }
 })
